@@ -13,13 +13,13 @@ const images = [
 ]
 
 /* Container */
-const container = document.querySelector('#contaier-items');
+const containerItems = document.querySelector('#contaier-items');
 
 
 /* Carregando as imagens */
-const loadImages = ( images, container ) => {
+const loadImages = ( images, containerItems ) => {
     images.forEach (image => {
-        container.innerHTML += `
+        containerItems.innerHTML += `
             <div class='item'>
                 <img src='${image.url}'
             </div>
@@ -28,4 +28,21 @@ const loadImages = ( images, container ) => {
 }
 
 
-loadImages( images, container);
+loadImages( images, containerItems);
+
+/* variavel para pegar todos os itens do slide */
+let items = document.querySelectorAll('.item');
+
+const previous = () => {
+    containerItems.appendChild(items[0]);
+    items = document.querySelectorAll('.item');
+}
+
+const next = () =>{
+    const lastItem = items[items.length - 1];
+    containerItems.insertBefore( lastItem, items[0]);
+    items = document.querySelectorAll('.item');
+}
+
+document.querySelector('#previous').addEventListener('click' ,previous);
+document.querySelector('#next').addEventListener('click' ,next);
